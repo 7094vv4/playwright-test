@@ -1,4 +1,5 @@
 import { test, expect } from "fixtures/loginTextFixture";
+import { User } from "models/User";
 
 test.describe("ログイン", () => {
   test("定義済みユーザでログインができること", async ({
@@ -6,12 +7,10 @@ test.describe("ログイン", () => {
     loginPage,
     page,
   }) => {
+    const user = await User.fromYaml("resources/login-test/山田一郎.yml");
     await topPage.goto();
     await topPage.goToLoginPage();
-    await loginPage.doLogin(
-      process.env.USER_NAME ?? "",
-      process.env.PASSWORD ?? ""
-    );
+    await loginPage.doLogin(user.email, user.password);
 
     await expect(page.locator("h2")).toHaveText("マイページ");
   });

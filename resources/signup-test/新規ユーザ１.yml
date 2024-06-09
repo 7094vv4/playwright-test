@@ -1,0 +1,9 @@
+email: new-user@example.com
+password: password
+username: 新規ユーザ１
+rank: 一般会員
+address: 神奈川県横浜市港区
+tel: "01234567891"
+gender: 女性
+birthday: 2000-01-01
+notification: true
