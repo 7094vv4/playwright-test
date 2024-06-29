@@ -1,5 +1,5 @@
 import { test, expect } from "fixtures/signupTestFixture";
-import { User, Rank } from "models/User";
+import { User } from "models/User";
 
 test.describe("会員登録", () => {
   test("ユーザの新規登録ができること", async ({
@@ -29,7 +29,6 @@ test.describe("会員登録", () => {
   test("必須項目を未入力にするとエラーとなること", async ({
     topPage,
     signupPage,
-    page,
   }) => {
     await topPage.goto();
     await topPage.goToSignupPage();
@@ -60,7 +59,6 @@ test.describe("会員登録", () => {
   test("指定のフォーマット外の入力でエラーとなること", async ({
     topPage,
     signupPage,
-    page,
   }) => {
     await topPage.goto();
     await topPage.goToSignupPage();
@@ -98,7 +96,6 @@ test.describe("会員登録", () => {
   test("登録済みのメールアドレスはエラーとなること", async ({
     topPage,
     signupPage,
-    page,
   }) => {
     const user = await User.fromYaml("resources/signup-test/山田一郎.yml");
     await topPage.goto();
@@ -124,7 +121,6 @@ test.describe("会員登録", () => {
   test("入力パスワードが一致しないとエラーとなること", async ({
     topPage,
     signupPage,
-    page,
   }) => {
     const user = await User.fromYaml("resources/signup-test/新規ユーザ１.yml");
     await topPage.goto();

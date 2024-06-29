@@ -1,17 +1,17 @@
 import { promises as fs } from "fs";
 import yaml from "js-yaml";
 
-export type Rank = "一般会員" | "プレミアム会員";
+type Rank = "一般会員" | "プレミアム会員";
 
-export type Gender = "回答しない" | "男性" | "女性" | "その他";
+type Gender = "回答しない" | "男性" | "女性" | "その他";
 
 type UserProps = {
   email: string;
   password: string;
   username: string;
   rank: Rank;
-  address: string;
-  tel: string;
+  address: string | null;
+  tel: string | null;
   gender: Gender;
   birthday: Date | null;
   notification: boolean;
@@ -23,8 +23,8 @@ export class User {
     private _password: string,
     private _username: string,
     private _rank: Rank,
-    private _address: string,
-    private _tel: string,
+    private _address: string | null,
+    private _tel: string | null,
     private _gender: Gender,
     private _birthday: Date | null,
     private _notification: boolean
@@ -46,11 +46,11 @@ export class User {
     return this._rank;
   }
 
-  get address(): string {
+  get address(): string | null {
     return this._address;
   }
 
-  get tel(): string {
+  get tel(): string | null {
     return this._tel;
   }
 

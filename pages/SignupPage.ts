@@ -1,5 +1,6 @@
-import { expect, type Locator, type Page } from "@playwright/test";
-import { Rank, Gender } from "models/User";
+import { type Locator, type Page } from "@playwright/test";
+import { formatDate } from "utils/utils";
+import { User } from "models/User";
 
 export class SignupPage {
   readonly page: Page;
@@ -52,23 +53,23 @@ export class SignupPage {
     this.submitButton = page.getByRole("button", { name: "登録" });
   }
 
-  async setEmail(email: string) {
+  async setEmail(email: User["email"]) {
     await this.email.fill(email);
   }
 
-  async setPassword(password: string) {
+  async setPassword(password: User["password"]) {
     await this.password.fill(password);
   }
 
-  async setPasswordConfirmation(password: string) {
+  async setPasswordConfirmation(password: User["password"]) {
     await this.passwordConfirmation.fill(password);
   }
 
-  async setUsername(username: string) {
+  async setUsername(username: User["username"]) {
     await this.username.fill(username);
   }
 
-  async setRank(rank: Rank) {
+  async setRank(rank: User["rank"]) {
     if (rank === "プレミアム会員") {
       await this.rankPremium.check();
     } else if (rank === "一般会員") {
@@ -76,37 +77,33 @@ export class SignupPage {
     }
   }
 
-  async setAddress(address: string) {
-    await this.address.fill(address);
+  async setAddress(address: User["address"]) {
+    await this.address.fill(address ?? "");
   }
 
-  async setTel(tel: string) {
-    await this.tel.fill(tel);
+  async setTel(tel: User["tel"]) {
+    await this.tel.fill(tel ?? "");
   }
 
-  async setGender(gender: Gender) {
+  async setGender(gender: User["gender"]) {
     await this.gender.selectOption({ label: gender });
   }
 
-  async setBirthday(birthday: Date | null) {
+  async setBirthday(birthday: User["birthday"]) {
     if (birthday !== null) {
-      const ymd = this.formatDateToYYYYMMDD(birthday);
+      const ymd = formatDate(birthday);
       await this.birthday.fill(`${ymd[0]}-${ymd[1]}-${ymd[2]}`);
     }
   }
 
-  formatDateToYYYYMMDD(date: Date): string[] {
-    const year = date.getFullYear().toString();
-    const month = ("0" + (date.getMonth() + 1)).slice(-2);
-    const day = ("0" + date.getDate()).slice(-2);
-    return [year, month, day];
-  }
-
-  async setNotification(notification: boolean) {
+  async setNotification(notification: User["notification"]) {
     await this.notification.setChecked(notification);
   }
 
   async submit() {
     await this.submitButton.click();
+    await this.page.waitForURL(
+      "https://hotel.testplanisphere.dev/ja/mypage.html"
+    );
   }
 }

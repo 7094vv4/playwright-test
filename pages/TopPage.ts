@@ -1,4 +1,4 @@
-import { expect, type Locator, type Page } from "@playwright/test";
+import { type Page } from "@playwright/test";
 import { NavigationBar } from "./NavigationBar";
 
 export class TopPage extends NavigationBar {
