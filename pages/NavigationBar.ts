@@ -2,11 +2,13 @@ import { type Locator, type Page } from "@playwright/test";
 
 export class NavigationBar {
   readonly loginButton: Locator;
-  readonly signupButton: Locator;
+  readonly signupLink: Locator;
+  readonly plansLink: Locator;
 
   constructor(page: Page) {
     this.loginButton = page.getByRole("button", { name: "ログイン" });
-    this.signupButton = page.getByRole("link", { name: "会員登録" });
+    this.signupLink = page.getByRole("link", { name: "会員登録" });
+    this.plansLink = page.getByRole("link", { name: "宿泊予約" });
   }
 
   async goToLoginPage() {
@@ -14,6 +16,10 @@ export class NavigationBar {
   }
 
   async goToSignupPage() {
-    await this.signupButton.click();
+    await this.signupLink.click();
+  }
+
+  async goToPlansPage() {
+    await this.plansLink.click();
   }
 }
