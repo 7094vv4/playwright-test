@@ -12,4 +12,11 @@ export class PlansPage extends NavigationBar {
     this.reserveButton = page.getByRole("link", { name: "このプランで予約" });
     this.planTitle = page.locator("h5.card-title");
   }
+
+  async openPlanByTitle(title: string) {
+    const reserveButton = this.page.locator(
+      `xpath=//h5[text()='${title}']/following-sibling::a[contains(concat(' ', normalize-space(@class), ' '), ' btn-primary ')]`
+    );
+    await reserveButton.click();
+  }
 }

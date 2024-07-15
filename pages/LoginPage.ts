@@ -17,8 +17,5 @@ export class LoginPage extends NavigationBar {
     await this.page.getByLabel("メールアドレス").fill(email);
     await this.page.getByLabel("パスワード").fill(password);
     await this.page.locator("#login-button").click();
-    await this.page.waitForURL(
-      "https://hotel.testplanisphere.dev/ja/mypage.html"
-    );
   }
 }

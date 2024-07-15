@@ -1,4 +1,4 @@
-import { test, expect } from "fixtures/loginTextFixture";
+import { test, expect } from "fixtures/loginTestFixture";
 import { User } from "models/User";
 
 test.describe("ログイン", () => {

@@ -1,0 +1,9 @@
+email: ichiro@example.com
+password: password
+username: 山田一郎
+rank: プレミアム会員
+address: 東京都豊島区池袋
+tel: "01234567891"
+gender: 男性
+birthday: null
+notification: true

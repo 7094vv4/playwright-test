@@ -22,7 +22,8 @@ export class IconPage extends NavigationBar {
   }
 
   async setZoom(value: number) {
-    if (value < 0 || value > 100) return;
+    if (value < 0 || value > 100)
+      throw new RangeError("0～100の範囲の数値を渡してください。");
 
     await this.page.evaluate((value) => {
       const zoom = document.querySelector("#zoom") as HTMLInputElement;
@@ -36,7 +37,8 @@ export class IconPage extends NavigationBar {
 
   async setColor(value: string) {
     const hexColorPattern = /^#([0-9A-F]{3}){1,2}$/i;
-    if (!hexColorPattern.test(value)) return;
+    if (!hexColorPattern.test(value))
+      throw new Error("16進数カラーコードとして有効な値を渡してください。");
 
     await this.page.evaluate((value) => {
       const color = document.querySelector("#color") as HTMLInputElement;

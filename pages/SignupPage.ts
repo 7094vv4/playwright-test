@@ -93,6 +93,8 @@ export class SignupPage {
     if (birthday !== null) {
       const ymd = formatDate(birthday);
       await this.birthday.fill(`${ymd[0]}-${ymd[1]}-${ymd[2]}`);
+    } else {
+      await this.birthday.clear();
     }
   }
 
@@ -102,8 +104,5 @@ export class SignupPage {
 
   async submit() {
     await this.submitButton.click();
-    await this.page.waitForURL(
-      "https://hotel.testplanisphere.dev/ja/mypage.html"
-    );
   }
 }
